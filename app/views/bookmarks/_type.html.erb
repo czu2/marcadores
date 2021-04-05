@@ -1,0 +1,8 @@
+<% @bookmark.types.each do |type| %>
+    <tr>
+        <td><%= type.theme %></td>
+        <td><%= type.link %></td>
+        <td><%= link_to 'X', type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_type_path(@type.id) %></td>
+    </tr>
+<% end %>

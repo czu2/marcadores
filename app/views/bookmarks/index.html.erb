@@ -1,29 +1,110 @@
-<p id="notice"><%= notice %></p>
+<div class="border border-dark rounded p-3 mt-3 bg-light">
+    <h4>Guardar URL</h4>
+    <%= render 'form', bookmark: @bookmark %>
+</div>
 
-<h1>Bookmarks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.url %></td>
-        <td><%= bookmark.status %></td>
-        <td><%= link_to 'Show', bookmark %></td>
-        <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
-        <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="border border-dark rounded p-3 mt-3 bg-light">
+    <%= search_form_for @q do |f| %>
+        <div class="d-flex justify-content-left">
+            <h5 class="mr-3">Filtrar por estado</h5>
+            <p class="mr-3"><%= f.select :status_eq, options_for_select(Bookmark.statuses, @q.status_eq) {},{class: "form-control"} %></p>
+            <p class="mr-3"><%= f.submit "Filtrar", class: "btn btn-dark text-white" %></p>
+        </div>
     <% end %>
-  </tbody>
-</table>
+</div>
 
-<br>
+<div class="border border-dark rounded p-3 mt-3 bg-light">
+    <table class="table table-bordered">
+        <thead class="table-warning text-center">
+            <tr>
+                <th>URL</th>
+                <th>Estado</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
 
-<%= link_to 'New Bookmark', new_bookmark_path %>
+        <tbody id="tbody">
+            <% @bookmarks.each do |bookmark| %>
+                <tr id="bookmark_<%=bookmark.id%>">
+                    <td><%= bookmark.url %></td>
+                    <td><%= bookmark.status %></td>
+                    <td>
+                        <span class="d-flex justify-content-center">
+                            <p class="mr-3"><%= link_to 'Editar', edit_bookmark_path(bookmark), remote: true %></p>
+                            <p><%= link_to 'Borrar', bookmark, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></p>
+                        </span>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+
+    </table>  
+</div>
+
+<div class="border border-dark rounded p-3 mt-3 bg-light">
+    <h2>Crear Categoría</h2>
+    <%= form_with(model: @category, url: create_category_path, method: :post, remote: true) do |form| %>
+
+        <div class="field">
+            <%= form.text_field :name, class:"input-group", placeholder: 'Nombre categoria' %>
+        </div>
+
+        <div class="field">
+            <%= form.label 'Subcategoría' %>
+            <%= form.select :subcategory_id, options_for_select(@subcategories.pluck(:name, :id)), remote: true, prompt: 'Selecciona una subcategoria' %>
+        </div>
+
+        <div class="field">
+            <%= form.label 'Marcador' %>
+            <%= form.select :bookmark_id, options_for_select(@bookmarks.pluck(:url, :id)), remote: true, prompt: 'Selecciona un marcador' %>
+        </div>
+
+        <div class="field">
+            <%= form.label 'Tipo' %>
+            <%= form.select :kind_id, options_for_select(@kinds.pluck(:name, :id)), remote: true, prompt: 'Selecciona un tipo' %>
+        </div>
+
+        <div class="actions">
+            <%= form.submit 'Guardar', class: "btn btn-dark mt-2" %>
+        </div>
+    <% end %>
+</div>
+
+<div class="border border-dark rounded p-3 mt-3 bg-light">
+    <h2 class="mb-4">Marcadores</h2>
+
+    <% @categories.each do |category| %>
+        <div class="container-fluid mb-3">
+            <table class="table table-bordered table-success">
+                <tr>
+                    <td colspan="4">
+                        <b><%= category.bookmark.url %></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Categoría</b></td>
+                    <td><b>Estado</b></td>
+                    <td><b>Subcategoria</b></td>
+                    <td><b>Tipo</b></td>
+                </tr>
+                <tr>
+                    <td><%= category.name %></td>
+                    <td><%= category.bookmark.status %></td>
+                    <td><%= category.subcategory.name %></td>
+                    <td><%= category.kind.name %></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <%= link_to '<i class="far fa-edit mr-3"></i>Editar'.html_safe, edit_category_path(category), class:'btn btn-warning border-dark text-dark' %>
+                        <%= link_to '<i class="far fa-edit mr-3"></i>Borrar'.html_safe, category, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:'btn btn-danger border-dark text-dark' %>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <% end %>
+</div>
+
+<div class="border border-dark rounded p-3 mt-3 bg-light">
+    <h2>Gráfico</h2>
+    <%= pie_chart @kind_graphic %>
+</div>

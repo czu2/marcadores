@@ -1,0 +1,6 @@
+<tr>
+    <td><%= cat.subcategory %></td>
+    <td><%#= cat.link %></td>
+    <td><%= link_to 'X', cat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Edit', edit_category_path(cat.id) %></td>
+</tr>

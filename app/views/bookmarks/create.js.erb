@@ -1,0 +1,12 @@
+$('#tbody').append(`
+        <tr id="bookmark_<%= @bookmark.id%>">
+            <td><%= @bookmark.url %></td>
+            <td><%= @bookmark.status %></td>
+            <td>
+                <span class="d-flex justify-content-center">
+                    <p class="mr-3"><%= link_to 'Editar', edit_bookmark_path(@bookmark), remote: true %></p>
+                    <p><%= link_to 'Borrar', @bookmark, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></p>
+                </span>
+            </td>
+        </tr>
+        `)
