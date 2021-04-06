@@ -6,9 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Category.destroy_all
+Kind.destroy_all
+Subcategory.destroy_all
+Bookmark.destroy_all
 
-Kind.destroy_all 
-Kind.create(
+Kind.create!(
     [
         {
             name: "Video",
@@ -64,8 +67,7 @@ Kind.create(
     ]
 )
 
-Subcategory.destroy_all 
-Subcategory.create(
+Subcategory.create!(
     [
         {
             name: "Noticias de Chile",
@@ -118,9 +120,7 @@ Subcategory.create(
     ]
 )
 
-
-Bookmark.destroy_all
-Bookmark.create(
+Bookmark.create!(
     [
         {
             url: "www.lun.com",
