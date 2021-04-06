@@ -2,7 +2,7 @@
 <td><%= bookmark.status %></td>
 <td>
     <span class="d-flex justify-content-center">
-        <p class="mr-3"><%= link_to 'Editar', edit_bookmark_path(bookmark), remote: true %></p>
-        <p><%= link_to 'Borrar', bookmark, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></p>
+        <p class="mr-2"><%= link_to '<i class="far fa-edit text-center"></i>'.html_safe, edit_bookmark_path(bookmark), remote: true, class:'btn btn-warning border-dark' %></p>
+        <p><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, bookmark, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:'btn btn-danger border-dark' %></p>
     </span>
 </td>

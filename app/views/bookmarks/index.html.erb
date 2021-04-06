@@ -1,21 +1,11 @@
 <div class="border border-dark rounded p-3 mt-3 bg-light">
-    <h4>Guardar URL</h4>
+    <h4>Guardar Marcador</h4>
     <%= render 'form', bookmark: @bookmark %>
 </div>
 
 <div class="border border-dark rounded p-3 mt-3 bg-light">
-    <%= search_form_for @q do |f| %>
-        <div class="d-flex justify-content-left">
-            <h5 class="mr-3">Filtrar por estado</h5>
-            <p class="mr-3"><%= f.select :status_eq, options_for_select(Bookmark.statuses, @q.status_eq) {},{class: "form-control"} %></p>
-            <p class="mr-3"><%= f.submit "Filtrar", class: "btn btn-dark text-white" %></p>
-        </div>
-    <% end %>
-</div>
-
-<div class="border border-dark rounded p-3 mt-3 bg-light">
-    <table class="table table-bordered">
-        <thead class="table-warning text-center">
+    <table class="table table-primary table-bordered">
+        <thead class="text-center thead-dark">
             <tr>
                 <th>URL</th>
                 <th>Estado</th>
@@ -25,13 +15,13 @@
 
         <tbody id="tbody">
             <% @bookmarks.each do |bookmark| %>
-                <tr id="bookmark_<%=bookmark.id%>">
+                <tr id="bookmark_<%=bookmark.id %>">
                     <td><%= bookmark.url %></td>
                     <td><%= bookmark.status %></td>
                     <td>
                         <span class="d-flex justify-content-center">
-                            <p class="mr-3"><%= link_to 'Editar', edit_bookmark_path(bookmark), remote: true %></p>
-                            <p><%= link_to 'Borrar', bookmark, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></p>
+                            <p class="mr-2"><%= link_to '<i class="far fa-edit text-center"></i>'.html_safe, edit_bookmark_path(bookmark), remote: true, class:'btn btn-warning border-dark' %></p>
+                            <p><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, bookmark, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:'btn btn-danger border-dark' %></p>
                         </span>
                     </td>
                 </tr>
@@ -70,33 +60,35 @@
     <% end %>
 </div>
 
-<div class="border border-dark rounded p-3 mt-3 bg-light">
+<div id="markers" class="border border-dark rounded p-3 mt-3 bg-light">
     <h2 class="mb-4">Marcadores</h2>
 
     <% @categories.each do |category| %>
-        <div class="container-fluid mb-3">
-            <table class="table table-bordered table-success">
+        <div id="markers_<%= category.id %>" class="container-fluid mb-3">
+            <table class="table table-bordered table-primary">
+                <thead class="table table-dark">
+                    <tr>
+                        <td colspan="4">
+                            <b><%= category.bookmark.url %></b>
+                        </td>
+                    </tr>
+                </thead>
                 <tr>
-                    <td colspan="4">
-                        <b><%= category.bookmark.url %></b>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>Categoría</b></td>
                     <td><b>Estado</b></td>
+                    <td><b>Categoría</b></td>
                     <td><b>Subcategoria</b></td>
                     <td><b>Tipo</b></td>
                 </tr>
                 <tr>
-                    <td><%= category.name %></td>
                     <td><%= category.bookmark.status %></td>
+                    <td><%= category.name %></td>
                     <td><%= category.subcategory.name %></td>
                     <td><%= category.kind.name %></td>
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <%= link_to '<i class="far fa-edit mr-3"></i>Editar'.html_safe, edit_category_path(category), class:'btn btn-warning border-dark text-dark' %>
-                        <%= link_to '<i class="far fa-edit mr-3"></i>Borrar'.html_safe, category, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:'btn btn-danger border-dark text-dark' %>
+                        <%= link_to '<i class="far fa-edit"></i> Editar'.html_safe, edit_category_path(category), remote: true, class:'btn btn-warning border-dark text-dark' %>
+                        <%= link_to '<i class="far fa-trash-alt"></i> Borrar'.html_safe, category, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:'btn btn-danger border-dark text-dark' %>
                     </td>
                 </tr>
             </table>

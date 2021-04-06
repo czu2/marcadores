@@ -8,7 +8,6 @@
 
 
 Kind.destroy_all 
-
 Kind.create(
     [
         {
@@ -22,9 +21,6 @@ Kind.create(
         },
         {
             name: "Fotografias",
-        },
-        {
-            name: "Educativo",
         },
         {
             name: "Academico",
@@ -48,12 +44,6 @@ Kind.create(
             name: "Idiomas",
         },
         {
-            name: "Ingles",
-        },
-        {
-            name: "Frances",
-        },
-        {
             name: "Chile",
         },
         {
@@ -63,13 +53,10 @@ Kind.create(
             name: "Caricaturas",
         },
         {
-            name: "El Universo",
+            name: "Universo",
         },
         {
             name: "Memes",
-        },
-        {
-            name: "Grafico",
         },
         {
             name: "Redes Sociales",
@@ -78,20 +65,16 @@ Kind.create(
 )
 
 Subcategory.destroy_all 
-
 Subcategory.create(
     [
         {
-            name: "Noticias chilenas",
+            name: "Noticias de Chile",
         },
         {
-            name: "Noticias internacionales",
+            name: "Noticias del Mundo",
         },
         {
-            name: "Memes chilenos",
-        },
-        {
-            name: "Musica chilena",
+            name: "Música chilena",
         },
         {
             name: "Musica internacional",
@@ -101,9 +84,6 @@ Subcategory.create(
         },
         {
             name: "Peliculas chilenas",
-        },
-        {
-            name: "Peliculas Europeas",
         },
         {
             name: "Peliculas internacionales",
@@ -121,25 +101,16 @@ Subcategory.create(
             name: "Arte Internacional",
         },
         {
-            name: "Golf internacional",
-        },
-        {
             name: "Tradiciones chilenas",
         },
         {
             name: "Musica electronica",
         },
         {
-            name: "Basketball USA",
-        },
-        {
-            name: "Futbol chileno",
+            name: "Deportes nacional",
         },
         {
             name: "Deporte internacional",
-        },
-        {
-            name: "deporte nacional",
         },
         {
             name: "Problemas con Redes Sociales",
@@ -152,11 +123,7 @@ Bookmark.destroy_all
 Bookmark.create(
     [
         {
-            url: "www.lun.cl",
-            status: 1
-        },
-        {
-            url: "www.natgeo.org",
+            url: "www.lun.com",
             status: 1
         },
         {
@@ -176,27 +143,7 @@ Bookmark.create(
             status: 1
         },
         {
-            url: "www.uc.cl",
-            status: 1
-        },
-        {
-            url: "www.steam.com",
-            status: 0
-        },
-        {
-            url: "www.un.org",
-            status: 0
-        },
-        {
             url: "www.espn.com",
-            status: 0
-        },
-        {
-            url: "www.golf.com",
-            status: 0
-        },
-        {
-            url: "www.ole.com.ar",
             status: 0
         },
         {
@@ -209,6 +156,3 @@ Bookmark.create(
         }
     ]
 )
-
-
-

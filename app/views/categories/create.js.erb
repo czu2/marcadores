@@ -1,0 +1,32 @@
+$('#markers').append(`
+        <div id="markers_<%= @category.id %>" class="container-fluid mb-3">
+            <table class="table table-bordered table-primary">
+                <thead class="table table-dark">
+                    <tr>
+                        <td colspan="4">
+                            <b><%= @category.bookmark.url %></b>
+                        </td>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><b>Estado</b></td>
+                    <td><b>Categoría</b></td>
+                    <td><b>Subcategoria</b></td>
+                    <td><b>Tipo</b></td>
+                </tr>
+                <tr>
+                    <td><%= @category.bookmark.status %></td>
+                    <td><%= @category.name %></td>
+                    <td><%= @category.subcategory.name %></td>
+                    <td><%= @category.kind.name %></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <%= link_to '<i class="far fa-edit"></i> Editar'.html_safe, edit_category_path(@category), class:'btn btn-warning border-dark text-dark' %>
+                        <%= link_to '<i class="far fa-trash-alt"></i> Borrar'.html_safe, @category, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:'btn btn-danger border-dark text-dark' %>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        `)

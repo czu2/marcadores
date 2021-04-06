@@ -3,14 +3,13 @@ class BookmarksController < ApplicationController
 
   def index
     @bookmark = Bookmark.new
-    @categories = Category.all
-    @kinds = Kind.all
+    @bookmarks = Bookmark.all
     @category = Category.new
+    @categories = Category.all
     @subcategories = Subcategory.all
+    @kinds = Kind.all
     @kind_graphic = Kind.group(:name).count()
     @bookmarks_graphic = Kind.group(:name).count()
-    @q = Bookmark.ransack(params[:q])
-    @bookmarks = @q.result(distinct: true)
   end
 
   def show
